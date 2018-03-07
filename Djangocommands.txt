@@ -1,0 +1,169 @@
+Microsoft Windows [Version 10.0.15063]
+(c) 2017 Microsoft Corporation. All rights reserved.
+
+Django superuser:
+subhajit
+subhajit.ece.ind@gmail.com
+temp@123
+
+C:\Users\Subhajit>django --version
+'django' is not recognized as an internal or external command,
+operable program or batch file.
+
+python manage.py makemigrations (after every model change)
+python manage.py migrate (it will commit changes/alter to DB)
+
+C:\Users\Subhajit>cd C:\subhajit
+
+C:\subhajit>cd projectX
+
+C:\subhajit\projectX>mkdir trydjango19
+
+C:\subhajit\projectX>cd trydjango19
+--(if required) pip install psycopg2
+C:\subhajit\projectX\trydjango19>pip install virtualenv
+Requirement already satisfied: virtualenv in c:\users\subhajit\appdata\local\programs\python\python36-32\lib\site-packages
+
+C:\subhajit\projectX\trydjango19>virtualenv .
+Using base prefix 'c:\\users\\subhajit\\appdata\\local\\programs\\python\\python36-32'
+New python executable in C:\subhajit\projectX\trydjango19\Scripts\python.exe
+Installing setuptools, pip, wheel...done.
+
+C:\subhajit\projectX\trydjango19>virtualenv .
+Using base prefix 'c:\\users\\subhajit\\appdata\\local\\programs\\python\\python36-32'
+New python executable in C:\subhajit\projectX\trydjango19\Scripts\python.exe
+Installing setuptools, pip, wheel...done.
+
+C:\subhajit\projectX\trydjango19>.scripts\activate
+The system cannot find the path specified.
+
+C:\subhajit\projectX\trydjango19> .scripts\activate
+The system cannot find the path specified.
+
+C:\subhajit\projectX\trydjango19>cd C:\subhajit\projectX\trydjango19\Scripts
+
+C:\subhajit\projectX\trydjango19\Scripts>activate
+
+(trydjango19) C:\subhajit\projectX\trydjango19\Scripts>pip freeze
+
+(trydjango19) C:\subhajit\projectX\trydjango19\Scripts>cd..
+
+(trydjango19) C:\subhajit\projectX\trydjango19>pip freeze
+
+(trydjango19) C:\subhajit\projectX\trydjango19>pip freeze
+
+(trydjango19) C:\subhajit\projectX\trydjango19>pip install django
+Collecting django
+  Using cached Django-2.0.2-py3-none-any.whl
+Collecting pytz (from django)
+  Using cached pytz-2018.3-py2.py3-none-any.whl
+Installing collected packages: pytz, django
+Successfully installed django-2.0.2 pytz-2018.3
+
+(trydjango19) C:\subhajit\projectX\trydjango19>
+
+----shell commands---
+Microsoft Windows [Version 10.0.15063]
+(c) 2017 Microsoft Corporation. All rights reserved.
+
+C:\Users\Subhajit>cd C:\subhajit\projectX\trydjango19
+
+C:\subhajit\projectX\trydjango19>.\scripts\activate
+
+(trydjango19) C:\subhajit\projectX\trydjango19>dir
+ Volume in drive C is Windows
+ Volume Serial Number is 945C-EB56
+
+ Directory of C:\subhajit\projectX\trydjango19
+
+23/02/2018  22:13    <DIR>          .
+23/02/2018  22:13    <DIR>          ..
+23/02/2018  18:55             2,013 Djangocommands.txt
+17/02/2018  21:03    <DIR>          Include
+23/02/2018  18:06    <DIR>          Lib
+23/02/2018  18:07                60 pip-selfcheck.json
+23/02/2018  21:23    <DIR>          Scripts
+23/02/2018  18:06    <DIR>          tcl
+23/02/2018  23:42    <DIR>          tryDjango19
+23/02/2018  21:36                45 tryDjango19X.sublime-project
+23/02/2018  22:09             2,778 tryDjango19X.sublime-workspace
+               4 File(s)          4,896 bytes
+               7 Dir(s)  1,868,237,230,080 bytes free
+
+(trydjango19) C:\subhajit\projectX\trydjango19>python manage.py shell
+python: can't open file 'manage.py': [Errno 2] No such file or directory
+
+(trydjango19) C:\subhajit\projectX\trydjango19>cd tryDjango19
+
+(trydjango19) C:\subhajit\projectX\trydjango19\tryDjango19>python manage.ppy shell
+python: can't open file 'manage.ppy': [Errno 2] No such file or directory
+
+(trydjango19) C:\subhajit\projectX\trydjango19\tryDjango19>python manage.py shell
+Python 3.6.4 (v3.6.4:d48eceb, Dec 19 2017, 06:04:45) [MSC v.1900 32 bit (Intel)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from posts.models import Post
+>>> Post.objects.all()
+[<Post: Tiger>, <Post: asd>, <Post: sub2>, <Post: sub1>]
+>>> Post.objects.filter(title__icontains="tig")
+[<Post: Tiger>]
+>>> Post.object.create(title='new post', content='new content')
+Traceback (most recent call last):
+  File "C:\subhajit\projectX\trydjango19\lib\site-packages\django\core\management\commands\shell.py", line 69, in handle
+    self.run_shell(shell=options['interface'])
+  File "C:\subhajit\projectX\trydjango19\lib\site-packages\django\core\management\commands\shell.py", line 61, in run_shell
+    raise ImportError
+ImportError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: type object 'Post' has no attribute 'object'
+>>> Post.objects.create(title='new post', content='new content')
+<Post: new post>
+>>> Post.objects.create(title='new post', content='new content')
+<Post: new post>
+>>> Post.objects.all()
+[<Post: Tiger>, <Post: asd>, <Post: sub2>, <Post: sub1>, <Post: new post>, <Post: new post>]
+>>> querySet= Post.objects.all()
+>>> for obj in querySet:
+... print obj.title
+  File "<console>", line 2
+    print obj.title
+        ^
+IndentationError: expected an indented block
+>>> for obj in querySet:
+...     print obj.title
+  File "<console>", line 2
+    print obj.title
+            ^
+SyntaxError: Missing parentheses in call to 'print'. Did you mean print(obj.title)?
+>>> for obj in querySet:
+...     print(obj.title)
+...     print(obj.content)
+...     print(obj.id)
+...
+Tiger
+The number of them is hunted down.
+1
+asd
+asdasd
+2
+sub2
+afsd
+3
+sub1
+afsd
+4
+new post
+new content
+5
+new post
+new content
+6
+>>>
+
+
+
+
