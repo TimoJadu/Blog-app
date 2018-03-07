@@ -3,7 +3,10 @@
 
 <div class='col-sm-8 col-sm-offset-2'>
 	<h1> {{ title }}</h1>
-
+	<form method="GET" action="">
+		<input type="text" placeholder="Search Post" name="q" value="{{ request.GET.q}}">
+		<input type="submit" value="Search" name="">
+	</form>
 	{% for obj in object_list %}
 	<div class="row">
 		<div class="col-sm-6 col-sm-offset-3">

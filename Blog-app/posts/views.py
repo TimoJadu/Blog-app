@@ -1,6 +1,6 @@
 from django.contrib import messages
 #from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
@@ -11,6 +11,8 @@ from .models import Post
 from .forms import PostForm
 
 def post_Create(request):
+	if not request.user.is_staff or not request.user.is_superuser:
+		raise Http404
 	# code to have default validation on POST data
 	form=PostForm(request.POST or None, request.FILES or None)
 	if form.is_valid():
@@ -40,7 +42,9 @@ def post_Create(request):
 def post_home(request):
 
 	querySet = Post.objects.all()
-
+	query= request.GET.get("q")
+	if (query):
+		querySet= querySet.filter(title__icontains=query)
 	if request.user.is_authenticated():
 		context = {
 		"object_list": querySet,
@@ -67,6 +71,8 @@ def post_details(request, id=None):
 
 
 def post_Update(request, id=None):
+	if not request.user.is_staff or not request.user.is_superuser:
+		raise Http404
 	instance = get_object_or_404(Post, id=id)
 	form=PostForm(request.POST or None, request.FILES or None, instance=instance)
 	if form.is_valid():
@@ -88,6 +94,8 @@ def post_Retrieve(request):
 	return HttpResponse("<h1>Retrieve</h1>")
 
 def post_Delete(request, id=None):
+	if not request.user.is_staff or not request.user.is_superuser:
+		raise Http404		
 	instance = get_object_or_404(Post, id=id)
 	instance.delete()
 	messages.success(request, "Deleted")
