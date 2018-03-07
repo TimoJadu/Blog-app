@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.conf import settings
 from django.core.urlresolvers import reverse
 
 def upload_location(instance, filename):
@@ -8,6 +8,7 @@ def upload_location(instance, filename):
 # Create your models here.
 class Post(models.Model):
 	"""docstring for ClassName"""
+	user= models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
 	title = models.CharField(max_length=120)
 	image = models.ImageField(upload_to=upload_location,
 			null=True, blank=True,
