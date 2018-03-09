@@ -10,5 +10,7 @@ class PostForm(forms.ModelForm):
 			"title",
 			"content",
 			'image',
+			"latitude",
+			"longitude",
 		]
 			
