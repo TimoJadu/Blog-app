@@ -3,6 +3,9 @@ from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
 
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import render
+
 # Create your views here.
 
 # def post_home(request):
@@ -41,22 +44,40 @@ def post_Create(request):
 # 	return render(request, "index.html", context)
 def post_home(request):
 
-	querySet = Post.objects.all()
+	querySet_list = Post.objects.all().order_by("-timestamp")
+
+	paginator = Paginator(querySet_list, 2) # Show 2 querySet per page
+	page_request_var= "page"
+	page = request.GET.get(page_request_var)
+	try:
+		querySet = paginator.page(page)
+	except PageNotAnInteger:
+		querySet=paginator.page(1)
+	except EmptyPage:
+		querySet=paginator.page(paginator.num_pages)
+
+
 	query= request.GET.get("q")
 	if (query):
 		querySet= querySet.filter(title__icontains=query)
 	if request.user.is_authenticated():
 		context = {
-		"object_list": querySet,
-		"title": "Welcome"
+			"object_list": querySet,
+			"title": "Welcome",
+			"page_request_var": page_request_var
 		}
 	else:
 		context = {
-		"object_list": querySet,
-		"title":"Home4"
+			"object_list": querySet,
+			"title":"Home4",
+			"page_request_var": page_request_var
 		}
 
 	return render(request, "post_list.html", context)
+
+
+
+
 
 def post_details(request, id=None):
 
