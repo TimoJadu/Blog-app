@@ -59,7 +59,7 @@ def post_home(request):
 
 	query= request.GET.get("q")
 	if (query):
-		querySet= querySet.filter(title__icontains=query)
+		querySet= querySet_list.filter(title__icontains=query)
 	if request.user.is_authenticated():
 		context = {
 			"object_list": querySet,

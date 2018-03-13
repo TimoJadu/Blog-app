@@ -32,6 +32,10 @@ class Post(models.Model):
 		# return "/posts/details/%s/"%(self.id)
 		return reverse("posts:detail", kwargs={"id": self.id})
 
+	def get_absolute_url_create(self):
+		# return "/posts/details/%s/"%(self.id)
+		return reverse("posts:create")
+
 		
 
 		
