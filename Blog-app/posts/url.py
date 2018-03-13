@@ -18,7 +18,6 @@ urlpatterns = [
     url(r'^(?P<id>\d+)/edit/$', post_Update, name="update"),
     url(r'^retrieve/$', post_Retrieve),
     url(r'^(?P<id>\d+)/delete/$', post_Delete),
-    url(r'^(?P<id>\d+)/$', post_details, name='detail'),
-    
+    url(r'^(?P<id>\d+)/$', post_details, name='detail'),    
 
 ]
